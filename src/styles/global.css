@@ -1,1 +1,146 @@
-/* global style */
+/* Import Normalize.css to standardize styles across browsers */
+@import "normalize.css";
+
+/* Set box-sizing to border-box for all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base styles for html and body */
+html {
+  font-size: 16px; /* Default font size for rem scaling */
+  line-height: 1.5; /* Improve text readability */
+  scroll-behavior: smooth; /* Smooth scrolling for better UX */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #333; /* Default text color */
+  background-color: #f4f4f9; /* Light background color for better contrast */
+  line-height: 1.6; /* Slightly increased line-height for readability */
+  min-height: 100vh; /* Ensure body always takes full height */
+  text-rendering: optimizeSpeed; /* Improve rendering for performance */
+  -webkit-font-smoothing: antialiased; /* Smoother font on macOS */
+  -moz-osx-font-smoothing: grayscale; /* Smoother font on Firefox */
+}
+
+/* Responsive media handling */
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* A consistent anchor link style */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #007bff; /* Primary color on hover */
+}
+
+/* Button styles */
+button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: var(--primary-color, #007bff); /* Default primary color */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-hover-color, #0056b3); /* Darker on hover */
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Form styles for better accessibility */
+input,
+textarea,
+select {
+  font: inherit;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Full width inputs */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color, #007bff);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* List styling */
+ul,
+ol {
+  padding-left: 1.5rem; /* Default list padding */
+  margin-bottom: 1rem;
+}
+
+/* Define root CSS variables for easy theming */
+:root {
+  --primary-color: #007bff;
+  --primary-hover-color: #0056b3;
+  --secondary-color: #6c757d;
+  --background-color: #f4f4f9;
+  --text-color: #333;
+  --font-size-base: 16px;
+  --spacing-base: 1rem;
+}
+
+/* Accessibility focus states */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Utility classes for margin and padding */
+
+
+/* Media query for responsive typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 12px;
+  }
+}
