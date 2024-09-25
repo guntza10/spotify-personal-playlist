@@ -50,6 +50,11 @@ body {
   min-height: 100vh;
   color: var(--text-color);
   background-color: var(--base-white);
+
+  background-image: url("../assets/images/background_photo_desktop.jpg");
+  background-size: cover;
+  background-position: right top;
+  background-repeat: no-repeat;
 }
 
 /* Default anchor tag styling */
@@ -74,6 +79,11 @@ img {
   display: block;
 }
 
+/* input */
+input:focus {
+  outline: none;
+}
+
 /* Button styling reset */
 button {
   background: none;
@@ -82,9 +92,19 @@ button {
   font-family: inherit;
   padding: 0;
   margin: 0;
+  font-size: var(--font-size-base);
 }
 
-/* Utility classes for margin and padding */
+/* Utility classes */
+.button {
+  cursor: pointer;
+  min-width: 200px;
+  padding: 0.77rem 0;
+  border-radius: 54px;
+  background-color: var(--primary-color);
+  color: var(--base-white);
+  font-weight: 500;
+}
 
 /* Default responsive layout */
 @media (max-width: 768px) {
