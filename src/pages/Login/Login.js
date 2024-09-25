@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { loginToSpotify } from "../../services/AuthContext";
 
 import Header from "../../layouts/Header/Header";
@@ -6,6 +6,10 @@ import Header from "../../layouts/Header/Header";
 import "./Login.css";
 
 const Login = () => {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   return (
     <div className="login-container">
       <Header />
