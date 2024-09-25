@@ -4,6 +4,7 @@ const CLIENT_SECRET = "eb22338df7154abd92f4b74cb4cab2c8";
 const REDIRECT_URI = "http://localhost:3000/callback";
 const SCOPES = [
   "user-read-private",
+  "user-read-email",
   "playlist-modify-public",
   "playlist-modify-private",
 ];
