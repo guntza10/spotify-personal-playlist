@@ -6,10 +6,12 @@
   --primary-color: #010c3f;
   --secondary-color: #6c41ec;
   --base-white: #fff;
+  --base-white-rgb: 255, 255, 255;
+  --primary-color-rgb: 1, 12, 63;
 
-  --text-color: #333;
+  --text-color: #fff;
   --font-size-base: 16px;
-  --spacing-base: 1rem;
+  --spacing-base: 0.5rem;
 }
 
 /* Set up box-sizing for all elements */
@@ -102,8 +104,29 @@ button {
   padding: 0.77rem 0;
   border-radius: 54px;
   background-color: var(--primary-color);
-  color: var(--base-white);
+  color: var(--text-color);
   font-weight: 500;
+}
+
+.mr-1 {
+  margin-right: var(--spacing-base);
+}
+
+.mb-_5 {
+  margin-bottom: calc(var(--spacing-base) / 2);
+}
+.mb-1 {
+  margin-bottom: var(--spacing-base);
+}
+.mb-2 {
+  margin-bottom: calc(var(--spacing-base) * 2);
+}
+
+.pb-1 {
+  padding-bottom: var(--spacing-base);
+}
+.pb-2 {
+  padding-bottom: calc(var(--spacing-base) * 2);
 }
 
 /* Default responsive layout */
