@@ -1,146 +1,97 @@
 /* Import Normalize.css to standardize styles across browsers */
 @import "normalize.css";
 
-/* Set box-sizing to border-box for all elements */
+/* Define root CSS variables for easy theming */
+:root {
+  --text-color: #333;
+  --base-bg: #f8f9fa;
+  --font-size-base: 16px;
+  --spacing-base: 1rem;
+}
+
+/* Set up box-sizing for all elements */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-/* Base styles for html and body */
-html {
-  font-size: 16px; /* Default font size for rem scaling */
-  line-height: 1.5; /* Improve text readability */
-  scroll-behavior: smooth; /* Smooth scrolling for better UX */
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #333; /* Default text color */
-  background-color: #f4f4f9; /* Light background color for better contrast */
-  line-height: 1.6; /* Slightly increased line-height for readability */
-  min-height: 100vh; /* Ensure body always takes full height */
-  text-rendering: optimizeSpeed; /* Improve rendering for performance */
-  -webkit-font-smoothing: antialiased; /* Smoother font on macOS */
-  -moz-osx-font-smoothing: grayscale; /* Smoother font on Firefox */
-}
-
-/* Responsive media handling */
-img,
-picture,
-video,
-canvas {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-/* A consistent anchor link style */
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #007bff; /* Primary color on hover */
-}
-
-/* Button styles */
-button {
-  cursor: pointer;
-  font: inherit;
-  border: none;
-  background-color: var(--primary-color, #007bff); /* Default primary color */
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: var(--primary-hover-color, #0056b3); /* Darker on hover */
-}
-
-button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-/* Form styles for better accessibility */
-input,
-textarea,
-select {
-  font: inherit;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%; /* Full width inputs */
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: var(--primary-color, #007bff);
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-/* Typography */
+/* Remove default margin and padding */
+html,
+body,
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+h6,
+p,
+ol,
+ul,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
 }
 
-p {
-  margin-bottom: 1rem;
+/* Set default font size and base font for body */
+html {
+  font-size: var(--font-size-base);
 }
 
-/* List styling */
+body {
+  font-family: "Arial", sans-serif; /* Adjust font based on your project */
+  line-height: 1.5;
+  min-height: 100vh;
+  color: var(--text-color);
+  background-color: var(--base-bg);
+}
+
+/* Default anchor tag styling */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Provide smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Set base line height and default typography for lists */
 ul,
 ol {
-  padding-left: 1.5rem; /* Default list padding */
-  margin-bottom: 1rem;
+  list-style: none;
 }
 
-/* Define root CSS variables for easy theming */
-:root {
-  --primary-color: #007bff;
-  --primary-hover-color: #0056b3;
-  --secondary-color: #6c757d;
-  --background-color: #f4f4f9;
-  --text-color: #333;
-  --font-size-base: 16px;
-  --spacing-base: 1rem;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-/* Accessibility focus states */
-:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+/* Button styling reset */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 /* Utility classes for margin and padding */
 
-
-/* Media query for responsive typography */
+/* Default responsive layout */
 @media (max-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 }
 
 @media (max-width: 576px) {
   html {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 }
