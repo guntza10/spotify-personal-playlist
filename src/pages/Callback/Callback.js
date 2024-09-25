@@ -11,7 +11,10 @@ const Callback = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
-    if (code) {
+
+    const existingToken = spotifyApi.getSpotifyAccessToken();
+    
+    if (code && !existingToken) {
       spotifyApi
         .getAccessToken(code)
         .then((res) => {
