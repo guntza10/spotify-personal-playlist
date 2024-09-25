@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import spotifyApi from "../../services/spotify";
 
@@ -9,6 +9,14 @@ import Playlist from "../../components/Playlist/Playlist";
 import "./Main.css";
 
 const Main = React.memo(({ className, ...props }) => {
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    spotifyApi.getCurrentUserProfile().then(({ id }) => {
+      setUserId(id);
+    });
+  }, []);
+
   // search
   const [search, setSearch] = useState("");
   const [searchedTracks, setSearchedTracks] = useState([]);
@@ -24,11 +32,12 @@ const Main = React.memo(({ className, ...props }) => {
       try {
         const { tracks } = await spotifyApi.searchSpotify(search);
         const searchedResults = tracks.items.map(
-          ({ id, name, artists, album }) => ({
+          ({ id, name, artists, album, uri }) => ({
             id,
             name,
             artist: artists[0].name,
             album: album.name,
+            uri,
           })
         );
         setSearchedTracks(searchedResults);
@@ -40,8 +49,13 @@ const Main = React.memo(({ className, ...props }) => {
   };
 
   // personal playlist
+  const [playlistName, setPlaylistName] = useState("");
   const [personalPlaylist, setPersonalPlaylist] = useState([]);
 
+  const handleChangePlaylistName = ({ target }) => {
+    const { value } = target;
+    setPlaylistName(value);
+  };
   const handleAddTrack = (track) => {
     setPersonalPlaylist((prev) => {
       const isExisted = prev.some((v) => v.id === track.id);
@@ -50,6 +64,29 @@ const Main = React.memo(({ className, ...props }) => {
   };
   const handleRemoveTrack = (track) => {
     setPersonalPlaylist((prev) => prev.filter((v) => v.id !== track.id));
+  };
+  const handleCreatePlaylist = async () => {
+    if (playlistName) {
+      try {
+        const request = {
+          name: playlistName,
+        };
+        const playlist = await spotifyApi.createPlaylist(userId, request);
+        const playlistId = playlist.data.id;
+
+        if (playlistId) {
+          const trackUris = personalPlaylist.map((v) => v.uri);
+          await spotifyApi.addTracksToPlaylist(playlistId, trackUris);
+          handleCompleteCreate();
+        } else throw new Error("Create playlist failed!");
+      } catch (error) {
+        alert("Create playlist failed!");
+      }
+    }
+  };
+  const handleCompleteCreate = () => {
+    setPlaylistName("");
+    setPersonalPlaylist([]);
   };
 
   return (
@@ -61,7 +98,13 @@ const Main = React.memo(({ className, ...props }) => {
       />
       <div className="content-container">
         <SearchResults tracks={searchedTracks} onAddTrack={handleAddTrack} />
-        <Playlist tracks={personalPlaylist} onRemoveTrack={handleRemoveTrack} />
+        <Playlist
+          tracks={personalPlaylist}
+          playlistName={playlistName}
+          onChangePlaylistName={handleChangePlaylistName}
+          onRemoveTrack={handleRemoveTrack}
+          onCreatePlaylist={handleCreatePlaylist}
+        />
       </div>
     </div>
   );
