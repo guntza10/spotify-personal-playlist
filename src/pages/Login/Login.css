@@ -1,0 +1,14 @@
+.login-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.login-content {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 45%;
+}
