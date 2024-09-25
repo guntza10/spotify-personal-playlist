@@ -1,7 +1,14 @@
 import React from "react";
+import Track from "../Track/Track";
 
-function Tracklist() {
-  return <div>Tracklist</div>;
-}
+const Tracklist = React.memo(({ tracks }) => {
+  return (
+    <div className="track-list">
+      {tracks.map((track) => (
+        <Track track={track} />
+      ))}
+    </div>
+  );
+});
 
 export default Tracklist;
