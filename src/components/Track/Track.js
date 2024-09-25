@@ -2,9 +2,9 @@ import React from "react";
 
 import "./Track.css";
 
-const Track = React.memo(({ track }) => {
+const Track = React.memo(({ track, className, ...props }) => {
   return (
-    <div className="track-container pb-2 mb-2">
+    <div {...props} className={`track-container pb-2 mb-2 ${className}`}>
       <div className="track-information">
         <h3 className="mb-_5">{track.name}</h3>
         <p className="track-info">

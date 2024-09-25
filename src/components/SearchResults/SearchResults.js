@@ -4,12 +4,15 @@ import TrackList from "../Tracklist/Tracklist";
 
 import "./SearchResults.css";
 
-const SearchResults = React.memo(({ results }) => {
+const SearchResults = React.memo(({ tracks, className, ...props }) => {
   return (
-    <div className="search-results-container card-content">
+    <div
+      {...props}
+      className={`card-content search-results-container ${className}`}
+    >
       <h2 className="result-heading">Results</h2>
 
-      <TrackList tracks={results} />
+      <TrackList tracks={tracks} />
     </div>
   );
 });

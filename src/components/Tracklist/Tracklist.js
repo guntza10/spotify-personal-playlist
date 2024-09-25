@@ -1,9 +1,10 @@
 import React from "react";
+
 import Track from "../Track/Track";
 
-const Tracklist = React.memo(({ tracks }) => {
+const Tracklist = React.memo(({ tracks, className, ...props }) => {
   return (
-    <div className="track-list">
+    <div {...props} className={className}>
       {tracks.map((track) => (
         <Track track={track} />
       ))}

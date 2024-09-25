@@ -13,13 +13,13 @@ const initialTrackList = [
   { id: 4, name: "D", artist: "DD", album: "DDD" },
   { id: 5, name: "E", artist: "EE", album: "EEE" },
 ];
-const Main = React.memo(() => {
+const Main = React.memo(({ className, ...props }) => {
   return (
-    <div className="main-container">
+    <div {...props} className={`main-container ${className}`}>
       <SearchBar />
       <div className="content-container">
-        <SearchResults results={initialTrackList} />
-        <Playlist />
+        <SearchResults tracks={initialTrackList} />
+        <Playlist tracks={initialTrackList} />
       </div>
     </div>
   );
