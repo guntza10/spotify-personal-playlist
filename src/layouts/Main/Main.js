@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SearchResults from "../../components/SearchResults/SearchResults";
@@ -13,13 +13,28 @@ const initialTrackList = [
   { id: 4, name: "D", artist: "DD", album: "DDD" },
   { id: 5, name: "E", artist: "EE", album: "EEE" },
 ];
+
 const Main = React.memo(({ className, ...props }) => {
+  const [searchedTracks, setSearchedTracks] = useState(initialTrackList);
+
+  const [personalPlaylist, setPersonalPlaylist] = useState([]);
+
+  const handleAddTrack = (track) => {
+    setPersonalPlaylist((prev) => {
+      const isExisted = prev.some((v) => v.id === track.id);
+      return isExisted ? [...prev] : [...prev, track];
+    });
+  };
+  const handleRemoveTrack = (track) => {
+    setPersonalPlaylist((prev) => prev.filter((v) => v.id !== track.id));
+  };
+
   return (
     <div {...props} className={`main-container ${className}`}>
       <SearchBar />
       <div className="content-container">
-        <SearchResults tracks={initialTrackList} />
-        <Playlist tracks={initialTrackList} />
+        <SearchResults tracks={searchedTracks} onAddTrack={handleAddTrack} />
+        <Playlist tracks={personalPlaylist} onRemoveTrack={handleRemoveTrack} />
       </div>
     </div>
   );
