@@ -5,6 +5,7 @@ import spotifyApi from "../../services/spotify";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SearchResults from "../../components/SearchResults/SearchResults";
 import Playlist from "../../components/Playlist/Playlist";
+import Spinner from "../../components/Spinner/Spinner";
 
 import "./Main.css";
 
@@ -16,16 +17,29 @@ const initialPagination = {
   total: 0,
 };
 const Main = React.memo(({ className, ...props }) => {
+  // userId
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
     const token = spotifyApi.getSpotifyAccessToken();
     if (token) {
+      handleOpenLoading();
       spotifyApi.getCurrentUserProfile().then(({ id }) => {
         setUserId(id);
+        handleCloseLoading();
       });
     }
   }, []);
+
+  // loading
+  const [loading, setLoading] = useState(false);
+
+  const handleOpenLoading = () => {
+    setLoading(true);
+  };
+  const handleCloseLoading = () => {
+    setLoading(false);
+  };
 
   // search
   const [search, setSearch] = useState("");
@@ -34,6 +48,7 @@ const Main = React.memo(({ className, ...props }) => {
 
   const fetchTracksFromSpotify = async (search, filter) => {
     try {
+      handleOpenLoading();
       const { tracks } = await spotifyApi.searchSpotify(search, filter);
       const { total, limit, offset } = tracks;
       const searchedResults = tracks.items.map(
@@ -56,6 +71,8 @@ const Main = React.memo(({ className, ...props }) => {
     } catch (error) {
       setSearchedTracks([]);
       alert("Data not found.");
+    } finally {
+      handleCloseLoading();
     }
   };
   const handleChangeSearch = ({ target }) => {
@@ -98,6 +115,7 @@ const Main = React.memo(({ className, ...props }) => {
   const handleCreatePlaylist = async () => {
     if (playlistName) {
       try {
+        handleOpenLoading();
         const request = {
           name: playlistName,
         };
@@ -111,6 +129,8 @@ const Main = React.memo(({ className, ...props }) => {
         } else throw new Error("Create playlist failed!");
       } catch (error) {
         alert("Create playlist failed!");
+      } finally {
+        handleCloseLoading();
       }
     }
   };
@@ -121,6 +141,7 @@ const Main = React.memo(({ className, ...props }) => {
 
   return (
     <div {...props} className={`main-container ${className}`}>
+      {loading && <Spinner />}
       <SearchBar
         search={search}
         onChange={handleChangeSearch}
