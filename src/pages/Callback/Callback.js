@@ -12,24 +12,39 @@ const Callback = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
 
+    // Guard Clause: Check if the token already exists
     const existingToken = spotifyApi.getSpotifyAccessToken();
-    
+
     if (code && !existingToken) {
-      spotifyApi
-        .getAccessToken(code)
-        .then((res) => {
-          const { access_token, expires_in, refresh_token } = res;
-          localStorage.setItem("spotifyAccessToken", access_token);
-          localStorage.setItem("spotifyRefreshToken", refresh_token);
-          localStorage.setItem(
-            "spotifyTokenExpires",
-            Date.now() + expires_in * 1000
-          );
-          navigate("/home");
-        })
-        .catch(() => {
-          navigate("/");
-        });
+      // Set a flag in localStorage to prevent multiple executions
+      if (!localStorage.getItem("isRequestingToken")) {
+        localStorage.setItem("isRequestingToken", "true"); // Set the flag
+
+        spotifyApi
+          .getAccessToken(code)
+          .then((res) => {
+            const { access_token, expires_in, refresh_token } = res;
+            localStorage.setItem("spotifyAccessToken", access_token);
+            localStorage.setItem("spotifyRefreshToken", refresh_token);
+            localStorage.setItem(
+              "spotifyTokenExpires",
+              Date.now() + expires_in * 1000
+            );
+
+            // Clear the flag and navigate to "/home"
+            localStorage.removeItem("isRequestingToken");
+            navigate("/home");
+          })
+          .catch((error) => {
+            console.error("Error fetching access token:", error);
+            // Clear the flag if there's an error
+            localStorage.removeItem("isRequestingToken");
+            navigate("/");
+          });
+      }
+    } else if (existingToken) {
+      // If the token already exists, navigate to "/home"
+      navigate("/home");
     }
   }, [navigate]);
 
