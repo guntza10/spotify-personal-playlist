@@ -12,9 +12,12 @@ const Main = React.memo(({ className, ...props }) => {
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    spotifyApi.getCurrentUserProfile().then(({ id }) => {
-      setUserId(id);
-    });
+    const token = spotifyApi.getSpotifyAccessToken();
+    if (token) {
+      spotifyApi.getCurrentUserProfile().then(({ id }) => {
+        setUserId(id);
+      });
+    }
   }, []);
 
   // search
