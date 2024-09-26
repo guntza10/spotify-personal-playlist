@@ -140,7 +140,6 @@ const spotifyApi = {
       if (this.isTokenExpired()) {
         await this.refreshToken();
       }
-      
       const token = this.getSpotifyAccessToken();
       const response = await axios.post(
         `${SPOTIFY_SERVICE_URL}/playlists/${playlistId}/tracks`,

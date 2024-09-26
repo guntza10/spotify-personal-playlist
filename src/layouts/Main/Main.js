@@ -8,6 +8,13 @@ import Playlist from "../../components/Playlist/Playlist";
 
 import "./Main.css";
 
+// initial value
+const initialPagination = {
+  offset: 0,
+  limit: 10,
+  pageCount: 1,
+  total: 0,
+};
 const Main = React.memo(({ className, ...props }) => {
   const [userId, setUserId] = useState("");
 
@@ -23,32 +30,52 @@ const Main = React.memo(({ className, ...props }) => {
   // search
   const [search, setSearch] = useState("");
   const [searchedTracks, setSearchedTracks] = useState([]);
+  const [pagination, setPagination] = useState(initialPagination);
 
+  const fetchTracksFromSpotify = async (search, filter) => {
+    try {
+      const { tracks } = await spotifyApi.searchSpotify(search, filter);
+      const { total, limit, offset } = tracks;
+      const searchedResults = tracks.items.map(
+        ({ id, name, artists, album, uri }) => ({
+          id,
+          name,
+          artist: artists[0].name,
+          album: album.name,
+          uri,
+        })
+      );
+
+      setSearchedTracks(searchedResults);
+      setPagination({
+        offset,
+        limit,
+        pageCount: Math.floor(total / limit),
+        total,
+      });
+    } catch (error) {
+      setSearchedTracks([]);
+      alert("Data not found.");
+    }
+  };
   const handleChangeSearch = ({ target }) => {
     const { value } = target;
     setSearch(value);
   };
-  const handleSearch = async (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
-
     if (search) {
-      try {
-        const { tracks } = await spotifyApi.searchSpotify(search);
-        const searchedResults = tracks.items.map(
-          ({ id, name, artists, album, uri }) => ({
-            id,
-            name,
-            artist: artists[0].name,
-            album: album.name,
-            uri,
-          })
-        );
-        setSearchedTracks(searchedResults);
-      } catch (error) {
-        setSearchedTracks([]);
-        alert("Data not found.");
-      }
+      fetchTracksFromSpotify(search);
     }
+  };
+  const handlePageChange = ({ selected }) => {
+    const { limit } = pagination;
+    const offset = selected * limit;
+    const filter = {
+      offset,
+      limit: limit,
+    };
+    fetchTracksFromSpotify(search, filter);
   };
 
   // personal playlist
@@ -100,7 +127,13 @@ const Main = React.memo(({ className, ...props }) => {
         onSearch={handleSearch}
       />
       <div className="content-container">
-        <SearchResults tracks={searchedTracks} onAddTrack={handleAddTrack} />
+        <SearchResults
+          tracks={searchedTracks}
+          pageCount={pagination.pageCount}
+          total={pagination.total}
+          onPageChange={handlePageChange}
+          onAddTrack={handleAddTrack}
+        />
         <Playlist
           tracks={personalPlaylist}
           playlistName={playlistName}
