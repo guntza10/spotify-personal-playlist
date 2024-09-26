@@ -11,10 +11,9 @@
 
 .card-content {
   background-color: rgba(var(--primary-color-rgb), 0.7);
-  padding: 0.88rem;
+  padding: 1rem;
   box-shadow: 0 4px 2px 2px #000000;
   border-radius: 8px;
-
-  /* height: 950px;
-  overflow-y: scroll; */
+  height: 90vh;
+  overflow-y: auto;
 }
