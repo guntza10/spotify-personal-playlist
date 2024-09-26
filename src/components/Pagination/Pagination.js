@@ -3,15 +3,16 @@ import ReactPaginate from "react-paginate";
 
 import "./Pagination.css";
 
-const Pagination = React.memo(({ pageCount, onPageChange }) => {
+const Pagination = React.memo(({ pageCount, onPageChange, ...props }) => {
   return (
     <ReactPaginate
+      {...props}
       previousLabel={"Previous"}
       nextLabel={"Next"}
       breakLabel={"..."}
       pageCount={pageCount}
       marginPagesDisplayed={1}
-      pageRangeDisplayed={5}
+      pageRangeDisplayed={1}
       onPageChange={onPageChange}
       containerClassName={"pagination"}
       activeClassName={"active"}
