@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { loginToSpotify } from "../../services/AuthContext";
+
+import { loginToSpotify } from "../../services/auth";
 
 import Header from "../../layouts/Header/Header";
 
