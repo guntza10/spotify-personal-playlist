@@ -1,0 +1,18 @@
+.preview-track-container,
+.preview-track-container .track-info {
+  color: var(--primary-color);
+}
+
+.preview-track-container {
+  min-width: 300px;
+}
+
+audio {
+  display: block;
+  width: 100%;
+}
+
+.close-btn {
+  display: block;
+  margin: 0 auto;
+}
