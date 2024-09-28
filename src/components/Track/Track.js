@@ -10,10 +10,13 @@ const Track = React.memo(
     const handleRemoveTrack = () => {
       onRemoveTrack(track);
     };
+    const handleOpenPreviewTrack = () => {
+      track.action(track);
+    };
 
     return (
       <div {...props} className={`track-container pb-2 mb-2 ${className}`}>
-        <div className="track-information">
+        <div className="track-information" onClick={handleOpenPreviewTrack}>
           <h3 className="mb-_5">{track.name}</h3>
           <p className="track-info">
             <span className="mr-1">{track.artist}</span>

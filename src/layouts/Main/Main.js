@@ -6,6 +6,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import SearchResults from "../../components/SearchResults/SearchResults";
 import Playlist from "../../components/Playlist/Playlist";
 import Spinner from "../../components/Spinner/Spinner";
+import PreviewTrack from "../../components/PreviewTrack/PreviewTrack";
 
 import "./Main.css";
 
@@ -41,9 +42,22 @@ const Main = React.memo(({ className, ...props }) => {
     setLoading(false);
   };
 
+  // isOpenPreviewTrack
+  const [selectedTrack, setSelectedTrack] = useState(null);
+  const [isOpenPreviewTrack, setIsOpenPreviewTrack] = useState(false);
+
+  const handleOpenPreviewTrack = (track) => {
+    setSelectedTrack(track);
+    setIsOpenPreviewTrack(true);
+  };
+  const handleClosePreviewTrack = () => {
+    setIsOpenPreviewTrack(false);
+  };
+
   // search
   const [search, setSearch] = useState("");
   const [searchedTracks, setSearchedTracks] = useState([]);
+
   const [pagination, setPagination] = useState(initialPagination);
 
   const fetchTracksFromSpotify = async (search, filter) => {
@@ -52,12 +66,14 @@ const Main = React.memo(({ className, ...props }) => {
       const { tracks } = await spotifyApi.searchSpotify(search, filter);
       const { total, limit, offset } = tracks;
       const searchedResults = tracks.items.map(
-        ({ id, name, artists, album, uri }) => ({
+        ({ id, name, artists, album, uri, preview_url }) => ({
           id,
           name,
           artist: artists[0].name,
           album: album.name,
           uri,
+          preview_url,
+          action: handleOpenPreviewTrack,
         })
       );
 
@@ -163,6 +179,15 @@ const Main = React.memo(({ className, ...props }) => {
           onCreatePlaylist={handleCreatePlaylist}
         />
       </div>
+
+      {/* Modal */}
+      {isOpenPreviewTrack && selectedTrack && (
+        <PreviewTrack
+          track={selectedTrack}
+          isOpen={isOpenPreviewTrack}
+          onClose={handleClosePreviewTrack}
+        />
+      )}
     </div>
   );
 });
