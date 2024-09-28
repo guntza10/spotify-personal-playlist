@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { loginToSpotify } from "../../services/auth";
 
 import Header from "../../layouts/Header/Header";
+import Button from "../../components/Button/Button";
 
 import "./Login.css";
 
@@ -16,9 +17,7 @@ const Login = () => {
       <Header />
       <div className="login-content">
         <h1 className="mb-3">Login to Spotify</h1>
-        <button className="button" onClick={loginToSpotify}>
-          Login with Spotify
-        </button>
+        <Button onClick={loginToSpotify}> LOGIN SPOTIFY</Button>
       </div>
     </div>
   );

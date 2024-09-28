@@ -1,6 +1,7 @@
 import React from "react";
 
 import Tracklist from "../Tracklist/Tracklist";
+import Button from "../Button/Button";
 
 import "./Playlist.css";
 
@@ -32,9 +33,9 @@ const Playlist = React.memo(
           onRemoveTrack={onRemoveTrack}
         />
 
-        <button className="button save-btn" onClick={onCreatePlaylist}>
+        <Button className="save-btn" onClick={onCreatePlaylist}>
           SAVE TO SPOTIFY
-        </button>
+        </Button>
       </div>
     );
   }
