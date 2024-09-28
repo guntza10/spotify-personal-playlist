@@ -1,5 +1,7 @@
 import React from "react";
 
+import { formattedStringNumberWithComma } from "../../utils/common";
+
 import TrackList from "../Tracklist/Tracklist";
 import Pagination from "../Pagination/Pagination";
 
@@ -20,7 +22,9 @@ const SearchResults = React.memo(
         {...props}
         className={`card-content search-results-container ${className}`}
       >
-        <h2 className="result-heading mb-3">Results {total ? total : ""}</h2>
+        <h2 className="result-heading mb-3">
+          Results {total ? formattedStringNumberWithComma(total) : ""}
+        </h2>
 
         <TrackList className="mb-3" tracks={tracks} onAddTrack={onAddTrack} />
 
