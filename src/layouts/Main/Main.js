@@ -66,13 +66,14 @@ const Main = React.memo(({ className, ...props }) => {
       const { tracks } = await spotifyApi.searchSpotify(search, filter);
       const { total, limit, offset } = tracks;
       const searchedResults = tracks.items.map(
-        ({ id, name, artists, album, uri, preview_url }) => ({
+        ({ id, name, artists, album, uri, preview_url, external_urls }) => ({
           id,
           name,
           artist: artists[0].name,
           album: album.name,
           uri,
           preview_url,
+          external_urls,
           action: handleOpenPreviewTrack,
         })
       );

@@ -12,7 +12,17 @@ audio {
   width: 100%;
 }
 
+.listen-full-song-btn {
+  display: block;
+  margin: 0 auto;
+  background-color: var(--secondary-color) !important;
+}
+
 .close-btn {
   display: block;
   margin: 0 auto;
+}
+
+.there-is-no-preview-url {
+  text-align: center;
 }
