@@ -1,5 +1,7 @@
 import React from "react";
 
+import Button from "../Button/Button";
+
 import "./SearchBar.css";
 
 const SearchBar = React.memo(
@@ -8,10 +10,9 @@ const SearchBar = React.memo(
       <div {...props} className={`search-bar-container ${className}`}>
         <form onSubmit={onSearch}>
           <input value={search} onChange={onChange} />
-
-          <button className="button search-button" type="submit">
+          <Button className="search-button" type="submit">
             SEARCH
-          </button>
+          </Button>
         </form>
       </div>
     );
