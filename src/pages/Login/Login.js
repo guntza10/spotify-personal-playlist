@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { loginToSpotify } from "../../services/auth";
 
 import Header from "../../layouts/Header/Header";
-import Button from "../../components/Button/Button";
+import Button from "../../components/common/Button/Button";
 
 import "./Login.css";
 

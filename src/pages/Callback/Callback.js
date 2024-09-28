@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import spotifyApi from "../../services/spotify";
 
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/common/Spinner/Spinner";
 
 import "./Callback.css";
 

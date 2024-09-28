@@ -1,7 +1,7 @@
 import React from "react";
 
-import Button from "../Button/Button";
-import Modal from "../Modal/Modal";
+import Button from "../common/Button/Button";
+import Modal from "../common/Modal/Modal";
 
 import "./PreviewTrack.css";
 

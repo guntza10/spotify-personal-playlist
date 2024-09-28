@@ -3,7 +3,7 @@ import React from "react";
 import { formattedStringNumberWithComma } from "../../utils/common";
 
 import TrackList from "../Tracklist/Tracklist";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../common/Pagination/Pagination";
 
 import "./SearchResults.css";
 

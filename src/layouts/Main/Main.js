@@ -5,7 +5,7 @@ import spotifyApi from "../../services/spotify";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SearchResults from "../../components/SearchResults/SearchResults";
 import Playlist from "../../components/Playlist/Playlist";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/common/Spinner/Spinner";
 import PreviewTrack from "../../components/PreviewTrack/PreviewTrack";
 
 import "./Main.css";
@@ -114,7 +114,14 @@ const Main = React.memo(({ className, ...props }) => {
   // personal playlist
   const [playlistName, setPlaylistName] = useState("");
   const [personalPlaylist, setPersonalPlaylist] = useState([]);
+  const [isOpenSuccess, setIsOpenSuccess] = useState(false);
 
+  const handleOpenSuccess = () => {
+    setIsOpenSuccess(true);
+  };
+  const handleCloseSuccess = () => {
+    setIsOpenSuccess(false);
+  };
   const handleChangePlaylistName = ({ target }) => {
     const { value } = target;
     setPlaylistName(value);
