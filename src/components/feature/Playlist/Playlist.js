@@ -1,7 +1,7 @@
 import React from "react";
 
 import Tracklist from "../Tracklist/Tracklist";
-import Button from "../common/Button/Button";
+import Button from "../../common/Button/Button";
 
 import "./Playlist.css";
 

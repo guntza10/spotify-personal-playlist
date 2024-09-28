@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import spotifyApi from "../../services/spotify";
 
-import SearchBar from "../../components/SearchBar/SearchBar";
-import SearchResults from "../../components/SearchResults/SearchResults";
-import Playlist from "../../components/Playlist/Playlist";
+import SearchBar from "../../components/feature/SearchBar/SearchBar";
+import SearchResults from "../../components/feature/SearchResults/SearchResults";
+import Playlist from "../../components/feature/Playlist/Playlist";
 import Spinner from "../../components/common/Spinner/Spinner";
-import PreviewTrack from "../../components/PreviewTrack/PreviewTrack";
+import PreviewTrack from "../../components/feature/PreviewTrack/PreviewTrack";
 
 import "./Main.css";
 
