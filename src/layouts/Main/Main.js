@@ -7,6 +7,8 @@ import SearchResults from "../../components/feature/SearchResults/SearchResults"
 import Playlist from "../../components/feature/Playlist/Playlist";
 import Spinner from "../../components/common/Spinner/Spinner";
 import PreviewTrack from "../../components/feature/PreviewTrack/PreviewTrack";
+import SuccessDialog from "../../components/common/SuccessDialog/SuccessDialog";
+import FailDialog from "../../components/common/FailDialog/FailDialog";
 
 import "./Main.css";
 
@@ -17,6 +19,11 @@ const initialPagination = {
   pageCount: 1,
   total: 0,
 };
+const initialDialogMessage = {
+  heading: "",
+  description: "",
+};
+
 const Main = React.memo(({ className, ...props }) => {
   // userId
   const [userId, setUserId] = useState("");
@@ -54,12 +61,36 @@ const Main = React.memo(({ className, ...props }) => {
     setIsOpenPreviewTrack(false);
   };
 
+  // isOpenSuccess,isOpenFail
+  const [isOpenSuccessDialog, setIsOpenSuccessDialog] = useState(false);
+  const [isOpenFailDialog, setIsOpenFailDialog] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState(initialDialogMessage);
+
+  const handleOpenSuccessDialog = () => {
+    setIsOpenSuccessDialog(true);
+  };
+  const handleCloseSuccessDialog = () => {
+    setIsOpenSuccessDialog(false);
+  };
+  const handleOpenFailDialog = () => {
+    setIsOpenFailDialog(true);
+  };
+  const handleCloseFailDialog = () => {
+    setIsOpenFailDialog(false);
+  };
+
   // search
   const [search, setSearch] = useState("");
   const [searchedTracks, setSearchedTracks] = useState([]);
-
   const [pagination, setPagination] = useState(initialPagination);
 
+  const handleOpenFailDialogForSearchTrack = () => {
+    setDialogMessage({
+      heading: "There is no track you've searched.",
+      description: "Please try another search.",
+    });
+    handleOpenFailDialog();
+  };
   const fetchTracksFromSpotify = async (search, filter) => {
     try {
       handleOpenLoading();
@@ -87,7 +118,7 @@ const Main = React.memo(({ className, ...props }) => {
       });
     } catch (error) {
       setSearchedTracks([]);
-      alert("Data not found.");
+      handleOpenFailDialogForSearchTrack();
     } finally {
       handleCloseLoading();
     }
@@ -115,14 +146,7 @@ const Main = React.memo(({ className, ...props }) => {
   // personal playlist
   const [playlistName, setPlaylistName] = useState("");
   const [personalPlaylist, setPersonalPlaylist] = useState([]);
-  const [isOpenSuccess, setIsOpenSuccess] = useState(false);
 
-  const handleOpenSuccess = () => {
-    setIsOpenSuccess(true);
-  };
-  const handleCloseSuccess = () => {
-    setIsOpenSuccess(false);
-  };
   const handleChangePlaylistName = ({ target }) => {
     const { value } = target;
     setPlaylistName(value);
@@ -135,6 +159,20 @@ const Main = React.memo(({ className, ...props }) => {
   };
   const handleRemoveTrack = (track) => {
     setPersonalPlaylist((prev) => prev.filter((v) => v.id !== track.id));
+  };
+  const handleOpenSuccessDialogForCreatePlaylist = () => {
+    setDialogMessage({
+      heading: "Create playlist success!",
+      description: "",
+    });
+    handleOpenSuccessDialog();
+  };
+  const handleOpenFailDialogForCreatePlaylist = () => {
+    setDialogMessage({
+      heading: "Create playlist failed!",
+      description: "Please try again.",
+    });
+    handleOpenFailDialog();
   };
   const handleCreatePlaylist = async () => {
     if (playlistName) {
@@ -152,7 +190,7 @@ const Main = React.memo(({ className, ...props }) => {
           handleCompleteCreate();
         } else throw new Error("Create playlist failed!");
       } catch (error) {
-        alert("Create playlist failed!");
+        handleOpenFailDialogForCreatePlaylist();
       } finally {
         handleCloseLoading();
       }
@@ -161,6 +199,7 @@ const Main = React.memo(({ className, ...props }) => {
   const handleCompleteCreate = () => {
     setPlaylistName("");
     setPersonalPlaylist([]);
+    handleOpenSuccessDialogForCreatePlaylist();
   };
 
   return (
@@ -194,6 +233,20 @@ const Main = React.memo(({ className, ...props }) => {
           track={selectedTrack}
           isOpen={isOpenPreviewTrack}
           onClose={handleClosePreviewTrack}
+        />
+      )}
+      {isOpenSuccessDialog && (
+        <SuccessDialog
+          isOpen={isOpenSuccessDialog}
+          onClose={handleCloseSuccessDialog}
+          message={dialogMessage}
+        />
+      )}
+      {isOpenFailDialog && (
+        <FailDialog
+          isOpen={isOpenFailDialog}
+          onClose={handleCloseFailDialog}
+          message={dialogMessage}
         />
       )}
     </div>
