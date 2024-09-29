@@ -15,3 +15,9 @@
 .dialog p {
   text-align: center;
 }
+
+.open-playlist-btn {
+  background-color: var(--secondary-color);
+  display: block;
+  margin: 0.5rem auto;
+}

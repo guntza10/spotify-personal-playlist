@@ -146,6 +146,7 @@ const Main = React.memo(({ className, ...props }) => {
   // personal playlist
   const [playlistName, setPlaylistName] = useState("");
   const [personalPlaylist, setPersonalPlaylist] = useState([]);
+  const [playlistUrl, setPlaylistUrl] = useState("");
 
   const handleChangePlaylistName = ({ target }) => {
     const { value } = target;
@@ -175,19 +176,24 @@ const Main = React.memo(({ className, ...props }) => {
     handleOpenFailDialog();
   };
   const handleCreatePlaylist = async () => {
-    if (playlistName) {
+    if (playlistName && personalPlaylist.length > 0) {
       try {
         handleOpenLoading();
         const request = {
           name: playlistName,
         };
         const playlist = await spotifyApi.createPlaylist(userId, request);
-        const playlistId = playlist.data.id;
+        const {
+          data: {
+            id: playlistId,
+            external_urls: { spotify: playlistUrl },
+          },
+        } = playlist;
 
         if (playlistId) {
           const trackUris = personalPlaylist.map((v) => v.uri);
           await spotifyApi.addTracksToPlaylist(playlistId, trackUris);
-          handleCompleteCreate();
+          handleCompleteCreate(playlistUrl);
         } else throw new Error("Create playlist failed!");
       } catch (error) {
         handleOpenFailDialogForCreatePlaylist();
@@ -196,9 +202,10 @@ const Main = React.memo(({ className, ...props }) => {
       }
     }
   };
-  const handleCompleteCreate = () => {
+  const handleCompleteCreate = (playlistUrl) => {
     setPlaylistName("");
     setPersonalPlaylist([]);
+    setPlaylistUrl(playlistUrl);
     handleOpenSuccessDialogForCreatePlaylist();
   };
 
@@ -240,6 +247,7 @@ const Main = React.memo(({ className, ...props }) => {
           isOpen={isOpenSuccessDialog}
           onClose={handleCloseSuccessDialog}
           message={dialogMessage}
+          playlistUrl={playlistUrl}
         />
       )}
       {isOpenFailDialog && (
