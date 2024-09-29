@@ -12,7 +12,7 @@ const FailDialog = React.memo(({ isOpen, message, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose} contentLabel="Fail Dialog">
       <div className="dialog">
         <div className="dialog-icon mb-1">
-          <MdCancel size={35} className="icon" />
+          <MdCancel size={35} className="fail-icon" />
         </div>
         <h2 className="mb-1">{message.heading}</h2>
         <p className="mb-3">{message.description}</p>
