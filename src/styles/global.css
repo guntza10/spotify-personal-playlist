@@ -3,12 +3,13 @@
 
 /* Define root CSS variables for easy theming */
 :root {
-  --primary-color: #010c3f;
-  --secondary-color: #6c41ec;
+  --primary-color: #1ed760;
+  --secondary-color: #121212;
   --base-white: #fff;
+  --base-black: #000;
   --base-white-rgb: 255, 255, 255;
   --base-black-rgb: 0, 0, 0;
-  --primary-color-rgb: 1, 12, 63;
+  --primary-color-rgb: 29, 185, 84;
 
   --text-color: #fff;
   --font-size-base: 16px;
@@ -54,9 +55,9 @@ body {
   color: var(--text-color);
   background-color: var(--base-white);
 
-  background-image: url("../assets/images/background_photo_desktop.jpg");
+  background-image: url("../assets/images/background-spotify.jpg");
   background-size: cover;
-  background-position: right top;
+  background-position: right;
   background-repeat: no-repeat;
 }
 
