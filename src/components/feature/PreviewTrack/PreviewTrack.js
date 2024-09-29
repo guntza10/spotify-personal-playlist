@@ -12,7 +12,7 @@ const PreviewTrack = React.memo(({ track, isOpen, onClose }) => {
     } = track;
     window.open(url, "_blank");
   };
-  
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} contentLabel="Preview track">
       <div className="preview-track-container">
@@ -43,7 +43,7 @@ const PreviewTrack = React.memo(({ track, isOpen, onClose }) => {
           Listen Full Song
         </Button>
         <Button className="close-btn" onClick={onClose}>
-          CLOSE
+          Close
         </Button>
       </div>
     </Modal>
