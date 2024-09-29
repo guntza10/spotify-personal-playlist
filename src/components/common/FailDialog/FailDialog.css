@@ -1,0 +1,17 @@
+.dialog {
+  color: var(--primary-color);
+  min-width: 300px;
+}
+
+.dialog-icon {
+  text-align: center;
+}
+
+.dialog-icon .icon {
+  color: red;
+}
+
+.dialog h2,
+.dialog p {
+  text-align: center;
+}
