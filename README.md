@@ -60,11 +60,8 @@ These instructions will help you set up a local copy of the project for developm
 4. Create a .env file in the root directory and add your Spotify API credentials:
 
    ```
-   REACT_APP_SPOTIFY_AUTH_URL=https://accounts.spotify.com/authorize
    REACT_APP_CLIENT_ID={your-client-id}
    REACT_APP_CLIENT_SECRET={your-client-secret}
-   REACT_APP_REDIRECT_URI=http://localhost:3000/callback
-   REACT_APP_SPOTIFY_SERVICE_URL=https://api.spotify.com/v1
    ```
 
 5. Start the development server:
