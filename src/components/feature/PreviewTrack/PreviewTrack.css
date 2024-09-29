@@ -1,6 +1,6 @@
 .preview-track-container,
 .preview-track-container .track-info {
-  color: var(--primary-color);
+  color: rgba(var(--base-black-rgb), 0.8);
 }
 
 .preview-track-container {
