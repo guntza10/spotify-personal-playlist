@@ -32,10 +32,15 @@ const Main = React.memo(({ className, ...props }) => {
     const token = spotifyApi.getSpotifyAccessToken();
     if (token) {
       handleOpenLoading();
-      spotifyApi.getCurrentUserProfile().then(({ id }) => {
-        setUserId(id);
-        handleCloseLoading();
-      });
+      spotifyApi
+        .getCurrentUserProfile()
+        .then(({ id }) => {
+          setUserId(id);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        })
+        .finally(handleCloseLoading);
     }
   }, []);
 

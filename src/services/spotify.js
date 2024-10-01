@@ -49,16 +49,14 @@ const spotifyApi = {
     try {
       const response = await axios.post(
         "https://accounts.spotify.com/api/token",
-        null,
+        new URLSearchParams({
+          grant_type: "authorization_code",
+          code: code,
+          redirect_uri: REDIRECT_URI,
+          client_id: CLIENT_ID,
+          client_secret: CLIENT_SECRET,
+        }).toString(),
         {
-          params: {
-            grant_type: "authorization_code",
-            // grant_type: "client_credentials",
-            code,
-            redirect_uri: REDIRECT_URI,
-            client_id: CLIENT_ID,
-            client_secret: CLIENT_SECRET,
-          },
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
@@ -68,6 +66,10 @@ const spotifyApi = {
       const { access_token, refresh_token, expires_in } = response.data;
       return { access_token, refresh_token, expires_in };
     } catch (error) {
+      console.error(
+        "Error fetching access token:",
+        error.response?.data || error.message
+      );
       throw new Error(error.message);
     }
   },
@@ -140,7 +142,7 @@ const spotifyApi = {
       if (this.isTokenExpired()) {
         await this.refreshToken();
       }
-      
+
       const token = this.getSpotifyAccessToken();
       const response = await axios.post(
         `${SPOTIFY_SERVICE_URL}/playlists/${playlistId}/tracks`,

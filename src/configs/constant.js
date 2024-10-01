@@ -9,6 +9,7 @@ const SCOPES = [
   "user-read-email",
   "playlist-modify-public",
   "playlist-modify-private",
+  "user-library-read",
 ];
 
 export {
