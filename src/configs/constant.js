@@ -2,7 +2,7 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
 const SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "http://localhost:3000/callback";
+const REDIRECT_URI = `${process.env.REACT_APP_WEB_URL}/callback`;
 const SPOTIFY_SERVICE_URL = "https://api.spotify.com/v1";
 const SCOPES = [
   "user-read-private",
