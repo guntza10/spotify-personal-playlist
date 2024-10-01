@@ -9,7 +9,11 @@ const SearchBar = React.memo(
     return (
       <div {...props} className={`search-bar-container ${className}`}>
         <form onSubmit={onSearch}>
-          <input value={search} onChange={onChange} />
+          <input
+            value={search}
+            onChange={onChange}
+            placeholder="Search with track, album or artist"
+          />
           <Button className="search-button" type="submit">
             SEARCH
           </Button>
