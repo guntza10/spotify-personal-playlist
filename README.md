@@ -4,7 +4,7 @@ Jammming is a React web application that allows users to search the Spotify libr
 
 ## Live Demo
 
-`Url:` https://2morrowboyz-jammming.netlify.app/
+`Url:` <a href="https://2morrowboyz-jammming.netlify.app" target="_blank" rel="noopener noreferrer">https://2morrowboyz-jammming.netlify.app</a>
 
 `Note:` My Spotify app service is currently in development mode, which requires adding users to grant them access to the API. Therefore, I will provide a test account for you as follows:
 
