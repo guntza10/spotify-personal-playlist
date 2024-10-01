@@ -5,15 +5,19 @@
   border-bottom: 1px solid rgba(var(--base-white-rgb), 0.8);
 }
 
-.track-information {
-  cursor: pointer;
-}
-
 p.track-info {
   color: rgba(var(--base-white-rgb), 0.8);
 }
 
+.preview-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color);
+  gap: calc(var(--spacing-base) * 1.5);
+  font-size: 0.875rem;
+}
+
 .track-action {
   color: var(--base-white);
-  font-size: 1.125rem;
 }
