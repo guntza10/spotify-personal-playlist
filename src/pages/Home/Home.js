@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const token = spotifyApi.getSpotifyAccessToken();
     if (!token) navigate("/");
-  }, []);
+  }, [navigate]);
 
   return (
     <div>
